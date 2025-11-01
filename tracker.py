@@ -50,7 +50,8 @@ def add_expense():
     category = input("Enter expense category: ")
     description = input("Enter expense description: ")
     cursor.execute(
-        "INSERT INTO expenses (amount, category, description) VALUES (?, ?, ?)",
+        "INSERT INTO expenses (amount, category, description) "
+        "VALUES (?, ?, ?)",
         (amount, category, description)
     )
     conn.commit()
