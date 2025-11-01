@@ -45,6 +45,7 @@ conn.commit()
 # Functions
 
 
+# This function adds an expense to the database
 def add_expense():
     amount = float(input("Enter expense amount: "))
     category = input("Enter expense category: ")
@@ -58,6 +59,7 @@ def add_expense():
     print("Expense added successfully.\n")
 
 
+# This function retrieves and displays all expenses from the database
 def view_expenses():
     cursor.execute("SELECT * FROM expenses")
     for row in cursor.fetchall():
@@ -65,6 +67,7 @@ def view_expenses():
     print()
 
 
+# This function retrieves and displays expenses filtered by category
 def view_expenses_by_category():
     category = input("Enter category: ")
     cursor.execute("SELECT * FROM expenses WHERE category = ?", (category,))
@@ -73,6 +76,7 @@ def view_expenses_by_category():
     print()
 
 
+# This function adds income to the database
 def add_income():
     amount = float(input("Enter income amount: "))
     category = input("Enter income category: ")
@@ -85,6 +89,7 @@ def add_income():
     print("Income added!\n")
 
 
+# This function retrieves and displays all income entries from the database
 def view_income():
     cursor.execute("SELECT * FROM income")
     for row in cursor.fetchall():
@@ -92,6 +97,7 @@ def view_income():
     print()
 
 
+# This function retrieves and displays income filtered by category
 def view_income_by_category():
     category = input("Enter category: ")
     cursor.execute("SELECT * FROM income WHERE category = ?", (category,))
@@ -100,6 +106,7 @@ def view_income_by_category():
     print()
 
 
+# This function sets a budget for a specific category
 def set_budget():
     category = input("Enter category name: ")
     limit_amount = float(input("Enter budget limit: "))
@@ -111,6 +118,7 @@ def set_budget():
     print("Budget set!\n")
 
 
+# This function retrieves and displays all budgets from the database
 def view_budget():
     cursor.execute("SELECT * FROM budgets")
     for row in cursor.fetchall():
@@ -118,6 +126,7 @@ def view_budget():
     print()
 
 
+# This function calculates and displays remaining funds
 def calculate_remaining_funds():
     cursor.execute("SELECT SUM(amount) FROM income")
     total_income = cursor.fetchone()[0] or 0
@@ -127,6 +136,7 @@ def calculate_remaining_funds():
     print(f"Remaining funds: {remaining}\n")
 
 
+# This function sets a financial goal in the database
 def set_goal():
     name = input("Enter goal name: ")
     target_amount = float(input("Enter target amount: "))
@@ -138,6 +148,7 @@ def set_goal():
     print("Goal added!\n")
 
 
+# This function retrieves and displays all financial goals from the database
 def view_goals():
     cursor.execute("SELECT * FROM goals")
     for row in cursor.fetchall():
@@ -145,6 +156,7 @@ def view_goals():
     print()
 
 
+# This function updates the progress of a financial goal
 def update_goal_progress():
     name = input("Enter goal name to update: ")
     amount = float(input("Enter amount to add to progress: "))
@@ -156,7 +168,7 @@ def update_goal_progress():
     print("Goal progress updated!\n")
 
 
-# Menu
+# Menu that displays options to the user
 def menu():
     while True:
         print("""
@@ -175,6 +187,7 @@ def menu():
 13. Quit
 """)
 
+# Get user choice
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -208,6 +221,7 @@ def menu():
             print("Invalid choice, try again.\n")
 
 
+# Run the menu
 if __name__ == "__main__":
     menu()
     conn.close()
