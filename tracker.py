@@ -86,8 +86,13 @@ def add_income():
 
 def view_income():
     cursor.execute("SELECT * FROM income")
-    for row in cursor.fetchall():
-        print(row)
+    rows = cursor.fetchall()
+    if not rows:
+        print("No income records found.\n")
+        return
+    for row in rows:
+        print(f"ID: {row[0]} | Amount: {row[1]} | "
+              f"Category: {row[2]} | Description: {row[3]}")
     print()
 
 
